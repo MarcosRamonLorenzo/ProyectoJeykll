@@ -20,9 +20,9 @@ source-code: https://github.com/CollectionBuilder/collectionbuilder-gh
 # SITE SETTINGS
 #
 # title of site appears in banner
-title: CollectionBuilder-GH
+title: Musiquilla
 # tagline, a short phrase that will appear throughout the site in the top banner
-tagline: a template for creating simple digital exhibits
+tagline: Colección de musica 
 # description appears in meta tags and other locations
 # this description might appear in search result lists, keep around 160 characters max
 description: 'CollectionBuilder-GH is a template for creating small digital collection exhibits on GitHub Pages designed for teaching digital library skills'
@@ -42,8 +42,8 @@ metadata: demo-metadata
 #
 organization-name: "Musiquilla"
 # organization-link: https://cdil.lib.uidaho.edu/
-organization-logo-banner: https://i.pinimg.com/1200x/0a/cc/6c/0acc6cb211d3d40445c7072d36036b8e.jpg
-organization-logo-nav: https://i.pinimg.com/1200x/0a/cc/6c/0acc6cb211d3d40445c7072d36036b8e.jpg
+organization-logo-banner: ../assets/logo.png
+organization-logo-nav: ../assets/logo.png
 
 ##########
 # ROBOTS EXCLUDE
