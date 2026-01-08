@@ -1,32 +1,57 @@
 {% if page.layout == "home-infographic" and site.data.theme.featured-image %}
 <style>
-#home-banner {
-    background-image: url('{% include image/featured-image.html %}');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: {{ site.data.theme.home-banner-image-position | default: 'center' }};
-}
-#home-title-box {
-    padding-top: {{ site.data.theme.home-title-y-padding | default: '5em' }};
-    padding-bottom: {{ site.data.theme.home-title-y-padding | default: '5em' }};
-}
-@media screen and (max-width: 576px) {
-    #home-title-box {
-        max-height: 500px;
+    #home-banner {
+        background-image: url('{% include image/featured-image.html %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        background-position: {
+                {
+                site.data.theme.home-banner-image-position | default: 'center'
+            }
+        }
+
+        ;
     }
-}
+
+    #home-title-box {
+        padding-top: {
+                {
+                site.data.theme.home-title-y-padding | default: '5em'
+            }
+        }
+
+        ;
+
+        padding-bottom: {
+                {
+                site.data.theme.home-title-y-padding | default: '5em'
+            }
+        }
+
+        ;
+    }
+
+    @media screen and (max-width: 576px) {
+        #home-title-box {
+            max-height: 500px;
+        }
+    }
 </style>
 <div id="home-banner" class="container-fluid mb-0 p-0">
-    <div id="home-title-box" class="position-relative" >
+    <div id="home-title-box" class="position-relative">
         <div class="p-2 text-center text-white ">
             {% if site.organization-logo-nav %}
             <a class="d-none d-md-block" href="{{ site.organization-link }}">
             </a>{% endif %}
-            <img id="home-banner-logo-img" src="../assets/home-logo-img.png" alt="{{ site.organization-name | escape }} home" >
+            <img id="home-banner-logo-img" src="../assets/home-logo-img.svg"
+                alt="{{ site.organization-name | escape }} home">
         </div>
         {% unless site.data.theme.featured-image contains '/' %}
         <div class="position-absolute bottom-0 end-0 px-2 bg-dark bg-opacity-75">
-            <a class="text-white fs-6" href="{% if featuredItem.parentid %}{{ site.data.theme.featured-image | prepend: '#' | prepend: featuredItem.parentid | prepend: '/item.html?id=' | relative_url }}{% else %}{{ site.data.theme.featured-image | prepend: '/item.html?id=' | relative_url }}{% endif %}" title="{{ featuredItem.title | escape }}">Featured Image</a>
+            <a class="text-white fs-6"
+                href="{% if featuredItem.parentid %}{{ site.data.theme.featured-image | prepend: '#' | prepend: featuredItem.parentid | prepend: '/item.html?id=' | relative_url }}{% else %}{{ site.data.theme.featured-image | prepend: '/item.html?id=' | relative_url }}{% endif %}"
+                title="{{ featuredItem.title | escape }}">Featured Image</a>
         </div>{% endunless %}
     </div>
 </div>
@@ -34,13 +59,14 @@
 <div class="container">
     <div class="row align-items-center">
         <div id="title" class="{% if site.organization-logo-banner %}col-md-9{% else %}col-12{% endif %}">
-            <h1 class="mt-2"><a class="text-dark" href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>	 
+            <h1 class="mt-2"><a class="text-dark" href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
             {% if site.tagline %}<p>{{ site.tagline }}</p>{% endif %}
         </div>
         {% if site.organization-logo-banner %}
         <div class="col-md-3 d-none d-lg-block text-end">
             <a class="btn btn-outline-light" href="{{ site.organization-link }}">
-                <img class="img-fluid" src="{{ site.organization-logo-banner | relative_url }}" title="{{ site.organization-name }}" alt="{{ site.organization-name | escape }} home" >
+                <img class="img-fluid" src="{{ site.organization-logo-banner | relative_url }}"
+                    title="{{ site.organization-name }}" alt="{{ site.organization-name | escape }} home">
             </a>
         </div>
         {% endif %}
