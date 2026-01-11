@@ -1,45 +1,289 @@
 ---
-# collection "Browse" page
+# Music Style Browse page
 layout: page
 custom-foot: js/browse-js.html
 ---
 
+<style>
+    /* Image Map Container */
+    .genre-map-container {
+        position: relative;
+        max-width: 1400px;
+        margin: 3rem auto;
+        padding: 0 1rem;
+    }
+
+    .genre-map-wrapper {
+        position: relative;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .genre-map-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Clickable Areas - Grid layout: 3 columns x 2 rows */
+    .genre-area {
+        position: absolute;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .genre-area:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(2px);
+    }
+
+    .genre-area:active {
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Grid positions - 3x2 layout */
+    /* Top row */
+    .area-urbano {
+        top: 0;
+        left: 0;
+        width: 33.33%;
+        height: 50%;
+    }
+
+    .area-espanola {
+        top: 0;
+        left: 33.33%;
+        width: 33.33%;
+        height: 50%;
+    }
+
+    .area-rock {
+        top: 0;
+        left: 66.66%;
+        width: 33.34%;
+        height: 50%;
+    }
+
+    /* Bottom row */
+    .area-jazz {
+        top: 50%;
+        left: 0;
+        width: 33.33%;
+        height: 50%;
+    }
+
+    .area-banda {
+        top: 50%;
+        left: 33.33%;
+        width: 33.33%;
+        height: 50%;
+    }
+
+    .area-synth {
+        top: 50%;
+        left: 66.66%;
+        width: 33.34%;
+        height: 50%;
+    }
+
+    /* Tooltip on hover */
+    .genre-tooltip {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        white-space: nowrap;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .genre-area:hover .genre-tooltip {
+        opacity: 1;
+    }
+
+    /* Browse Section Styles */
+    .browse-section {
+        margin-top: 3rem;
+        display: none;
+    }
+
+    .browse-section.active {
+        display: block;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .back-button:hover {
+        background: #5a6268;
+    }
+
+    .page-title {
+        text-align: center;
+        margin: 2rem 0 1rem;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .page-subtitle {
+        text-align: center;
+        color: #6c757d;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .instruction-text {
+        text-align: center;
+        color: #888;
+        font-size: 0.9rem;
+        font-style: italic;
+        margin-top: 1rem;
+    }
+</style>
+
 {{ content }}
 
-<div class="row mb-3 justify-content-center">
-    <div class="col-md-8 text-center">
-        <form role="search" id="browseFilter" onsubmit="submitFilter(); return false;">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" id="filterTextBox" placeholder="Filter ... "
-                    aria-label="Search">
-                <button class="btn btn-success" type="submit" title="Filter items" id="filterButton">Search</button>
-                <button class="btn btn-outline-secondary filter" onclick="resetFilter(); return false;"
-                    data-filter="">Reset</button>
+<!-- Genre Selection Section -->
+<div id="genreSection">
+    <h1 class="page-title">Explore Music by Genre</h1>
+    <p class="page-subtitle">Click on any section of the image to explore that music genre</p>
+
+    <div class="genre-map-container">
+        <div class="genre-map-wrapper">
+            <!-- Music Style Image Map - 6 clickable zones (3x2 grid) -->
+            <img src="{{ '/assets/style_music_img.png' | relative_url }}" alt="Music Genres Map" class="genre-map-image"
+                id="genreMapImage">
+
+            <!-- Clickable areas overlay -->
+            <div class="genre-area area-urbano" onclick="filterByGenre('Urbano y Electrónica')">
+                <div class="genre-tooltip">Urbano y Electrónica</div>
             </div>
-        </form>
-        <div class="h2" id="numberOf"></div>
-    </div>
-    <div class="col-md-2">
-        <div class="dropdown">
-            <button class="btn btn-secondary mt-1 dropdown-toggle" type="button" id="browseSortButton"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort by <span id="sortFilter">Random</span>
-            </button>
-            <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
-                <button class="dropdown-item browse-sort-item active" data-filter="random">Random</button>
-                <button class="dropdown-item browse-sort-item" data-filter="title">Title</button>
-                {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %}
-                {% for o in sort_options %}
-                <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{ o.sort_name
-                    }}</button>
-                {% endfor %}
+
+            <div class="genre-area area-espanola" onclick="filterByGenre('Música Española')">
+                <div class="genre-tooltip">Música Española</div>
+            </div>
+
+            <div class="genre-area area-rock" onclick="filterByGenre('Rock Alternativo')">
+                <div class="genre-tooltip">Rock Alternativo</div>
+            </div>
+
+            <div class="genre-area area-jazz" onclick="filterByGenre('Jazz')">
+                <div class="genre-tooltip">Jazz</div>
+            </div>
+
+            <div class="genre-area area-banda" onclick="filterByGenre('Banda Sonora')">
+                <div class="genre-tooltip">Banda Sonora</div>
+            </div>
+
+            <div class="genre-area area-synth" onclick="filterByGenre('Synth-pop')">
+                <div class="genre-tooltip">Synth-pop</div>
             </div>
         </div>
     </div>
+
 </div>
 
-<div id="loadingIcon" class="text-center">
-    <div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>
+<!-- Browse Section (hidden by default) -->
+<div id="browseSection" class="browse-section">
+    <div class="section-header">
+        <button class="back-button" onclick="showGenreSelection()">
+            <span>←</span> Back to Genre Map
+        </button>
+        <h2 id="currentGenreTitle"></h2>
+        <div></div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-md-8 text-center">
+            <form role="search" id="browseFilter" onsubmit="submitFilter(); return false;">
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" id="filterTextBox" placeholder="Filter ... "
+                        aria-label="Search">
+                    <button class="btn btn-success" type="submit" title="Filter items" id="filterButton">Search</button>
+                    <button class="btn btn-outline-secondary filter" onclick="resetFilter(); return false;"
+                        data-filter="">Reset</button>
+                </div>
+            </form>
+            <div class="h2" id="numberOf"></div>
+        </div>
+        <div class="col-md-2">
+            <div class="dropdown">
+                <button class="btn btn-secondary mt-1 dropdown-toggle" type="button" id="browseSortButton"
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by <span id="sortFilter">Random</span>
+                </button>
+                <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
+                    <button class="dropdown-item browse-sort-item active" data-filter="random">Random</button>
+                    <button class="dropdown-item browse-sort-item" data-filter="title">Title</button>
+                    {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %}
+                    {% for o in sort_options %}
+                    <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{ o.sort_name
+                        }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingIcon" class="text-center">
+        <div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>
+    </div>
+
+    <div class="row" id="browseItems"></div>
 </div>
 
-<div class="row" id="browseItems"></div>
+<script>
+    let currentGenre = null;
+
+    function filterByGenre(genre) {
+        currentGenre = genre;
+        document.getElementById('genreSection').style.display = 'none';
+        document.getElementById('browseSection').classList.add('active');
+        document.getElementById('currentGenreTitle').textContent = genre;
+
+        // Set the filter to the genre
+        document.getElementById('filterTextBox').value = genre;
+        submitFilter();
+    }
+
+    function showGenreSelection() {
+        document.getElementById('genreSection').style.display = 'block';
+        document.getElementById('browseSection').classList.remove('active');
+        currentGenre = null;
+        document.getElementById('filterTextBox').value = '';
+    }
+</script>

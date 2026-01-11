@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla de Imagen - Music Genres</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .grid-template {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2px;
+            background: #fff;
+            border: 3px solid #333;
+            margin: 20px 0;
+        }
+
+        .grid-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            border: 2px dashed #999;
+            transition: all 0.3s ease;
+        }
+
+        .grid-cell:hover {
+            background: rgba(0, 0, 0, 0.05);
+            transform: scale(1.02);
+        }
+
+        .cell-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .cell-subtitle {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .cell-position {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        /* Colores sugeridos para cada género */
+        .urbano {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .espanola {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .rock {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .jazz {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .banda {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        .synth {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .instructions h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .instructions ul {
+            line-height: 1.8;
+        }
+
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎵 Plantilla de Imagen para Music Genres</h1>
+
+        <div class="instructions">
+            <h2>📐 Especificaciones</h2>
+            <ul>
+                <li><strong>Dimensiones:</strong> 1400px × 800px (o proporción 16:9)</li>
+                <li><strong>Layout:</strong> Cuadrícula 3×2 (3 columnas, 2 filas)</li>
+                <li><strong>Formato:</strong> JPEG, PNG o WEBP</li>
+                <li><strong>Ubicación:</strong> <code>assets/background.jpeg</code></li>
+            </ul>
+        </div>
+
+        <h2 style="text-align: center; margin: 30px 0 10px;">Vista Previa del Layout</h2>
+        <p style="text-align: center; color: #666;">Pasa el mouse sobre cada sección para ver el efecto hover</p>
+
+        <div class="grid-template">
+            <div class="grid-cell urbano">
+                <div class="cell-title">Urbano y Electrónica</div>
+                <div class="cell-subtitle">DJ mixer, luces neón, sintetizadores</div>
+                <div class="cell-position">Posición: Top-Left (0%, 0%)</div>
+            </div>
+
+            <div class="grid-cell espanola">
+                <div class="cell-title">Música Española</div>
+                <div class="cell-subtitle">Guitarra flamenca, rosas, elementos españoles</div>
+                <div class="cell-position">Posición: Top-Center (33.33%, 0%)</div>
+            </div>
+
+            <div class="grid-cell rock">
+                <div class="cell-title">Rock Alternativo</div>
+                <div class="cell-subtitle">Guitarra eléctrica, amplificador, pedales</div>
+                <div class="cell-position">Posición: Top-Right (66.66%, 0%)</div>
+            </div>
+
+            <div class="grid-cell jazz">
+                <div class="cell-title">Jazz</div>
+                <div class="cell-subtitle">Saxofón, trompeta, club de jazz</div>
+                <div class="cell-position">Posición: Bottom-Left (0%, 50%)</div>
+            </div>
+
+            <div class="grid-cell banda">
+                <div class="cell-title">Banda Sonora</div>
+                <div class="cell-subtitle">Rollo de película, partitura, batuta</div>
+                <div class="cell-position">Posición: Bottom-Center (33.33%, 50%)</div>
+            </div>
+
+            <div class="grid-cell synth">
+                <div class="cell-title">Synth-pop</div>
+                <div class="cell-subtitle">Sintetizador retro, colores neón 80s</div>
+                <div class="cell-position">Posición: Bottom-Right (66.66%, 50%)</div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h2>🎨 Consejos de Diseño</h2>
+            <ul>
+                <li>Usa <strong>colores distintivos</strong> para cada sección (como los mostrados arriba)</li>
+                <li>Añade <strong>iconos o objetos representativos</strong> de cada género</li>
+                <li>Incluye <strong>texto visible</strong> con el nombre del género en cada sección</li>
+                <li>Mantén un <strong>estilo visual coherente</strong> en toda la imagen</li>
+                <li>Asegúrate de que los elementos importantes estén <strong>centrados</strong> en cada sección</li>
+                <li>Usa <strong>líneas divisorias sutiles</strong> entre secciones si es necesario</li>
+            </ul>
+        </div>
+
+        <div class="instructions">
+            <h2>🚀 Cómo Usar Esta Plantilla</h2>
+            <ol>
+                <li>Toma una captura de pantalla de la cuadrícula de arriba (o úsala como referencia)</li>
+                <li>Crea tu imagen en Photoshop, Figma, Canva, etc.</li>
+                <li>Divide tu canvas en 6 secciones iguales (3×2)</li>
+                <li>Diseña cada sección con elementos del género correspondiente</li>
+                <li>Exporta como <code>background.jpeg</code> en la carpeta <code>assets/</code></li>
+                <li>¡Recarga la página y disfruta!</li>
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>
