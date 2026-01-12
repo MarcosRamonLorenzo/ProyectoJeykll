@@ -44,8 +44,7 @@
             {% if site.organization-logo-nav %}
             <a class="d-none d-md-block" href="{{ site.organization-link }}">
             </a>{% endif %}
-            <img id="home-banner-logo-img" src="../assets/home-logo-img.svg"
-                alt="{{ site.organization-name | escape }} home">
+            <div style="height: 400px; background-size: contain;"></div>
         </div>
         {% unless site.data.theme.featured-image contains '/' %}
         <div class="position-absolute bottom-0 end-0 px-2 bg-dark bg-opacity-75">
@@ -56,20 +55,9 @@
     </div>
 </div>
 {%- else -%}
-<div class=" m-0 !flex !w-full iems-center space-between" style="padding: 0 40px">
-    <div class="row align-items-center">
-        <div id="title" class="{% if site.organization-logo-banner %}col-md-9{% else %}col-12{% endif %}">
-            <h1 class="mt-2"><a class="text-dark" href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
-            {% if site.tagline %}<p>{{ site.tagline }}</p>{% endif %}
-        </div>
-        {% if site.organization-logo-banner %}
-        <div class="col-md-3 d-none d-lg-block text-end ">
-            <a class="btn btn-outline-light" href="{{ site.organization-link }}">
-                <img class="" style="width: 200px;;" src="{{ site.organization-logo-banner | relative_url }}"
-                    title="{{ site.organization-name }}" alt="{{ site.organization-name | escape }} home">
-            </a>
-        </div>
-        {% endif %}
-    </div>
+<div class=""
+    style="padding: 0 40px; background-image: url('../assets/collection-img.png'); background-position: contain">
+    <div style="height: 400px; "></div>
+
 </div>
 {%- endif -%}
