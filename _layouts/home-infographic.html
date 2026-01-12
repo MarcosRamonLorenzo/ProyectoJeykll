@@ -1,30 +1,129 @@
 ---
-# Default home page with boxes providing collection stats
-layout: page
+layout: default
 ---
-<div class="row">
+<!-- Professional Home Page Layout -->
+<div class="home-container">
 
-  <div class="col-md-8">
+  <!-- Hero Section -->
+  <section class="hero-section d-flex align-items-center justify-content-center text-center text-white"
+    style="background-image: url('{{ '/assets/background.jpeg' | relative_url }}');">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container position-relative">
+      <h1 class="display-3 fw-bold mb-4 animate-fade-in-up">Descubre la Cultura Musical</h1>
+      <p class="lead mb-5 animate-fade-in-up delay-100">Explora una colección curada de estilos, artistas legendarios y
+        los momentos que definieron la historia de la música.</p>
+      <div class="animate-fade-in-up delay-200">
+        <a href="{{ '/browse.html' | relative_url }}"
+          class="btn btn-primary-custom btn-lg px-5 me-3 rounded-pill shadow-lg text-decoration-none">
+          Explorar Colección
+        </a>
+        <a href="{{ '/music_style.html' | relative_url }}"
+          class="btn btn-outline-light btn-lg px-5 rounded-pill backdrop-blur text-decoration-none">
+          Estilos Musicales
+        </a>
+      </div>
+    </div>
+  </section>
 
-    {% include index/description.html %}
-    {% include index/carousel.html title="Sample Items" height="300" %}
-  
-  </div>
-  <div class="col-md-4">  
+  <!-- Featured Entry Points -->
+  <section class="py-5 bg-white">
+    <div class="container py-5">
+      <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="fw-bold display-6 mb-3 section-title">Explora por Categoría</h2>
+          <p class="text-muted lead">Navega a través de diferentes dimensiones de nuestra colección musical.</p>
+        </div>
+      </div>
 
-    {% include index/time.html %}
+      <div class="row g-4">
+        <!-- Genres Card -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-lift text-center p-4 rounded-3 bg-light">
+            <div class="card-body">
+              <div
+                class="icon-box mb-4 mx-auto text-white bg-primary bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 80px; height: 80px;">
+                <!-- Music Icon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                  class="bi bi-music-note-beamed" viewBox="0 0 16 16">
+                  <path
+                    d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13c0-1.104 1.12-2 2.5-2s2.5.896 2.5 2zm9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2z" />
+                  <path fill-rule="evenodd" d="M14 11V2h1v9h-1zM6 3v10H5V3h1z" />
+                  <path
+                    d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3a1 1 0 0 1-1.1 1l-8 .8A1 1 0 0 1 5 4v-1.095z" />
+                </svg>
+              </div>
+              <h3 class="h4 card-title fw-bold">Géneros</h3>
+              <p class="card-text text-muted mb-4">Rock, Jazz, Pop, Electronic... Explora la evolución de los géneros
+                musicales a través del tiempo.</p>
+              <a href="{{ '/browse.html' | relative_url }}" class="stretched-link fw-bold text-decoration-none">Ver
+                Géneros &rarr;</a>
+            </div>
+          </div>
+        </div>
 
-    {% include index/featured-terms.html field="subject" title="Top Subjects" btn-color="primary" %}
+        <!-- Timeline Card -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-lift text-center p-4 rounded-3 bg-light">
+            <div class="card-body">
+              <div
+                class="icon-box mb-4 mx-auto text-white bg-success bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 80px; height: 80px;">
+                <!-- Clock/Timeline Icon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                  class="bi bi-clock-history" viewBox="0 0 16 16">
+                  <path
+                    d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.027 7.027 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123c-.035.215-.075.433-.12.65l-.954-.263zm-.492 2.059a6.996 6.996 0 0 0-.423.834l.87.496c.203-.355.378-.737.52-1.144l-.967-.186zm-1.045 1.706c.097-.101.19-.204.281-.309l.737.677c-.12.137-.245.27-.37.399l-.648-.767zm-1.558 1.109c.125-.098.246-.201.363-.309l.626.79a7.97 7.97 0 0 1-.806.682l-.183-.983-.001-.18zm-1.92.332c.162-.054.32-.112.476-.176l.37.93a7.99 7.99 0 0 1-.955.352l.109-.997zm-2.008-.066c.187-.014.373-.035.556-.062l.148.989a8.03 8.03 0 0 1-1.112.124l.408-.912zm-1.782-.416a6.99 6.99 0 0 0 .762-.486l-.508-.863c-.31.198-.602.417-.872.651l.618.698zm-1.34-1.077a7.03 7.03 0 0 0 .546-.68l-.75-.662a8.01 8.01 0 0 1-.818 1.02l.822.322zm-1.096-1.564a7.025 7.025 0 0 0 .285-.97l-.99-.144c-.066.38-.103.766-.11 1.156l.996.042c-.003-.028-.007-.056-.01-.084zm-.309-1.977c-.014-.188-.022-.377-.022-.568h-1c0 .248.011.492.032.734l.99-.166z" />
+                  <path
+                    d="M8 4.5a.5.5 0 0 1 .5.5v3.293l2.854 2.853a.5.5 0 0 1-.708.708L7.5 8.207V5a.5.5 0 0 1 .5-.5z" />
+                </svg>
+              </div>
+              <h3 class="h4 card-title fw-bold">Línea de Tiempo</h3>
+              <p class="card-text text-muted mb-4">Viaja por la historia y descubre cuándo sucedieron los momentos clave
+                de la música.</p>
+              <a href="{{ '/timeline.html' | relative_url }}" class="stretched-link fw-bold text-decoration-none">Ver
+                Timeline &rarr;</a>
+            </div>
+          </div>
+        </div>
 
-    {% include index/featured-terms.html field="location" title="Locations" btn-color="outline-secondary" %}
+        <!-- Map Card -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-lift text-center p-4 rounded-3 bg-light">
+            <div class="card-body">
+              <div
+                class="icon-box mb-4 mx-auto text-white bg-danger bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 80px; height: 80px;">
+                <!-- Geo Icon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                  class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                </svg>
+              </div>
+              <h3 class="h4 card-title fw-bold">Lugares</h3>
+              <p class="card-text text-muted mb-4">Descubre dónde nació la música que amas y explora escenas locales.
+              </p>
+              <a href="{{ '/map.html' | relative_url }}" class="stretched-link fw-bold text-decoration-none">Ver Mapa
+                &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    {% include index/objects.html %}
+  <!-- Featured Items Carousel -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-5 section-title">Destacados de la Colección</h2>
+      <div class="card shadow-lg border-0 rounded-3 overflow-hidden">
+        <div class="card-body p-0">
+          {% include index/carousel.html title="" height="450" %}
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </div>
-  <div class="col-md-12">
 
-    {% include index/data-download.html %}
 
-  </div>
-  
 </div>
