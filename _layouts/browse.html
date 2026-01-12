@@ -145,7 +145,7 @@ custom-foot: js/browse-js.html
     <! -- Added ID here -->
         <div class="row justify-content-center g-4" id="genre-filters">
             <div class="col-12 text-center mb-3">
-                <h5 class="text-muted text-uppercase fw-bold ls-1" style="letter-spacing: 2px;">Explore Genres</h5>
+                <h5 class="text-muted text-uppercase fw-bold ls-1" style="letter-spacing: 2px;">Explorar Géneros</h5>
             </div>
             {% for subject in subjects %}
             {% capture color %}{% cycle '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD', '#D4A5A5', '#9B59B6',
@@ -153,11 +153,11 @@ custom-foot: js/browse-js.html
             <div class="col-md-4">
                 <div class="aspect-square">
                     <div onclick="filterByGenre('{{ subject | url_encode }}')"
-                        class="relative w-full h-full overflow-hidden rounded-3xl cursor-pointer shadow-lg"
-                        style="background-color: {{ color }};">
+                        class="relative w-full h-full overflow-hidden rounded-3xl cursor-pointer shadow-lg "
+                        style="background-color: {{ color }}; height: 200px; width: 400px; border-radius: 20px">
                         <!-- Texto -->
                         <span
-                            class="absolute top-4 left-4 right-4 text-white font-bold text-2xl md:text-3xl leading-tight drop-shadow">
+                            class="absolute top-4 left-4 right-4 text-white font-bold text-2xl md:text-3xl leading-tight drop-shadow ">
                             {{ subject }}
                         </span>
 
@@ -168,6 +168,23 @@ custom-foot: js/browse-js.html
                 </div>
             </div>
             {% endfor %}
+            <div class="col-md-4 ">
+                <div class="aspect-square">
+                    <div onclick="filterByGenre('{{ subject | url_encode }}')"
+                        class="relative w-full h-full overflow-hidden rounded-3xl cursor-pointer shadow-lg "
+                        style="background-color: {{ color }}; height: 200px; width: 400px; border-radius: 20px">
+                        <!-- Texto -->
+                        <span
+                            class="absolute top-4 left-4 right-4 text-white font-bold text-2xl md:text-3xl leading-tight drop-shadow ">
+                            Todas
+                        </span>
+
+                        <!-- Imagen inclinada -->
+                        <img src="{{}}"
+                            class="absolute -bottom-6 -right-6 w-32 h-32 md:w-40 md:h-40 object-cover rounded-lg rotate-12 shadow-xl" />
+                    </div>
+                </div>
+            </div>
         </div>
 </div>
 
