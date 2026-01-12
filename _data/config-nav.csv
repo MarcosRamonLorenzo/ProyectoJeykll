@@ -1,8 +1,7 @@
 display_name,stub,dropdown_parent
-Home,/
-Browse,/browse.html
-Musical Style,/music_style.html,
-Subjects,/subjects.html
+Inico,/
+Explorar,/explore.html
+Coleccionismo ,/music_style.html,
 Timeline,/timeline.html
-Data,/data.html
-About,/about.html
+Datos,/data.html
+Acerca de,/about.html
