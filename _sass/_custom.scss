@@ -148,6 +148,13 @@
     border-radius: 2px;
 }
 
+#genre-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Genre Page Styles */
 .genre-header {
     margin-bottom: 2rem;
@@ -165,6 +172,8 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
     padding: 1rem 0;
+    height: 500px;
+    width: 700px;
 }
 
 .genre-card {

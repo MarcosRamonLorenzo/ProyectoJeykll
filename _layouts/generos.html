@@ -1,42 +1,190 @@
 ---
-layout: default
+layout: page
 title: Explorar Géneros
 permalink: /generos.html
+custom-foot: js/browse-js.html
 ---
 
-<div class="container py-5">
-    <div class="genre-header">
-        <h1>Explora por Género</h1>
-        <p class="lead text-muted">Encuentra música navegando por estilos y categorías.</p>
+<style>
+    #genreSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Browse Section Styles (Hidden by default) */
+    .browse-section {
+        display: none;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .browse-section.active {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Back Button */
+    .back-btn-container {
+        margin-bottom: 2rem;
+    }
+
+    .btn-back {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+        transform: translateX(-5px);
+    }
+
+    /* Genre Header for Browse View */
+    .browse-genre-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(45deg, #6366f1, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+
+<div class="container py-3">
+    <center>
+        <!-- GENRE SELECTION VIEW -->
+        <div id="genreSection"
+            style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div class="genre-header">
+                <h1>Explora por Género</h1>
+                <p class="lead text-muted">Encuentra música navegando por estilos y categorías.</p>
+            </div>
+
+            <div class="genre-grid">
+                {% for genre in site.data.genres %}
+                <a href="javascript:void(0);" onclick="filterByGenre('{{ genre.subject | url_encode }}')"
+                    class="genre-card" style="background-color: {{ genre.color }};">
+                    <div class="genre-card-content">
+                        {{ genre.subject }}
+                    </div>
+                    <div class="genre-card-img-container">
+                        <img src="{{ genre.image }}" alt="{{ genre.subject }}" class="genre-card-img">
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </center>
+
+    <!-- BROWSE RESULTS VIEW -->
+    <div id="browseSection" class="browse-section">
+
+        <!-- Back Button -->
+        <div class="back-btn-container">
+            <button class="btn btn-outline-dark btn-back" onclick="showGenreSelection()">
+                <span class="me-2">←</span> Volver a Géneros
+            </button>
+        </div>
+
+        <!-- Header -->
+        <div class="text-center">
+            <h2 id="currentGenreTitle" class="browse-genre-title"></h2>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="row mb-4 justify-content-center">
+            <div class="col-md-8 text-center">
+                <form role="search" id="browseFilter" onsubmit="submitFilter(); return false;">
+                    <div class="input-group input-group-lg shadow-sm">
+                        <input type="text" class="form-control border-0" id="filterTextBox"
+                            placeholder="Buscar en este género..." aria-label="Search">
+                        <button class="btn btn-primary-custom" type="submit" title="Filtrar"
+                            id="filterButton">Buscar</button>
+                        <button class="btn btn-outline-secondary"
+                            onclick="resetFilter(); return false;">Limpiar</button>
+                    </div>
+                </form>
+                <div class="h5 mt-3 text-muted" id="numberOf"></div>
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="col-md-2 mt-3 mt-md-0">
+                <div class="dropdown">
+                    <button class="btn btn-light shadow-sm w-100 dropdown-toggle" type="button" id="browseSortButton"
+                        data-bs-toggle="dropdown">
+                        Ordenar por <span id="sortFilter">Aleatorio</span>
+                    </button>
+                    <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
+                        <button class="dropdown-item browse-sort-item active" data-filter="random">Aleatorio</button>
+                        <button class="dropdown-item browse-sort-item" data-filter="title">Título</button>
+                        {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %}
+                        {% for o in sort_options %}
+                        <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{
+                            o.sort_name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingIcon" class="text-center my-5">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="row" id="browseItems"></div>
     </div>
 
-    <div class="genre-grid">
-        {% for genre in site.data.genres %}
-        {% comment %}
-        Construct the link. We navigate to browse.html with the genre as a hash.
-        {% endcomment %}
-        <a href="javascript:void(0);" onclick="filterByGenre('{{ genre.subject | url_encode }}')" class="genre-card"
-            style="background-color: {{ genre.color }};">
-            <div class="genre-card-content">
-                {{ genre.subject }}
-            </div>
-            <div class="genre-card-img-container">
-                <img src="{{ genre.image }}" alt="{{ genre.subject }}" class="genre-card-img">
-            </div>
-        </a>
-        {% endfor %}
-    </div>
 </div>
 
 <script>
     function filterByGenre(encodedGenre) {
-        // Liquid's url_encode replaces spaces with +, but typical URL decoding expects %20 for spaces
-        // We replace + with %20 to ensure the browse page filters correctly
-        let safeGenre = encodedGenre.replace(/\+/g, '%20');
+        // Decode the genre coming from Liquid
+        if (encodedGenre === "Todos") {
+            encodedGenre = "";
+        }
+        let genre = decodeURIComponent(encodedGenre.replace(/\+/g, ' '));
 
-        // Redirect to browse page with the genre as the hash
-        // The browse.html page automatically filters based on the hash (window.location.hash)
-        const browseUrl = "{{ '/browse.html' | relative_url }}";
-        window.location.href = browseUrl + "#" + safeGenre;
+        // Switch Views
+        document.getElementById('genreSection').style.display = 'none';
+        document.getElementById('browseSection').classList.add('active');
+
+        // Set Title
+        document.getElementById('currentGenreTitle').textContent = genre;
+
+        // Set the filter input value to the genre name so browser-js filters by it
+        document.getElementById('filterTextBox').value = genre;
+
+        // Trigger the search
+        submitFilter();
+    }
+
+    function showGenreSelection() {
+        // Switch Views
+        document.getElementById('genreSection').style.display = 'block';
+        document.getElementById('browseSection').classList.remove('active');
+
+        // Reset
+        document.getElementById('filterTextBox').value = '';
+        // We can optionally reset the filter so it shows everything next time, or keeps state. 
+        // Resetting is usually cleaner when navigating "back".
+        if (typeof resetFilter === 'function') {
+            resetFilter();
+        }
     }
 </script>
