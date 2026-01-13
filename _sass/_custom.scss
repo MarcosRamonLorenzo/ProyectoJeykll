@@ -147,3 +147,89 @@
     background-color: #6366f1;
     border-radius: 2px;
 }
+
+/* Genre Page Styles */
+.genre-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.genre-header h1 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.genre-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.genre-card {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    /* 1:1 Aspect Ratio */
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.genre-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.genre-card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    color: white;
+    font-weight: 700;
+    font-size: 1.4rem;
+    z-index: 2;
+}
+
+.genre-card-img-container {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 100px;
+    height: 100px;
+    transform: rotate(25deg);
+    box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.genre-card:hover .genre-card-img-container {
+    transform: rotate(30deg) scale(1.05);
+}
+
+.genre-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+
+.genre-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+    z-index: 1;
+    pointer-events: none;
+}

@@ -1,0 +1,42 @@
+---
+layout: default
+title: Explorar Géneros
+permalink: /generos.html
+---
+
+<div class="container py-5">
+    <div class="genre-header">
+        <h1>Explora por Género</h1>
+        <p class="lead text-muted">Encuentra música navegando por estilos y categorías.</p>
+    </div>
+
+    <div class="genre-grid">
+        {% for genre in site.data.genres %}
+        {% comment %}
+        Construct the link. We navigate to browse.html with the genre as a hash.
+        {% endcomment %}
+        <a href="javascript:void(0);" onclick="filterByGenre('{{ genre.subject | url_encode }}')" class="genre-card"
+            style="background-color: {{ genre.color }};">
+            <div class="genre-card-content">
+                {{ genre.subject }}
+            </div>
+            <div class="genre-card-img-container">
+                <img src="{{ genre.image }}" alt="{{ genre.subject }}" class="genre-card-img">
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function filterByGenre(encodedGenre) {
+        // Liquid's url_encode replaces spaces with +, but typical URL decoding expects %20 for spaces
+        // We replace + with %20 to ensure the browse page filters correctly
+        let safeGenre = encodedGenre.replace(/\+/g, '%20');
+
+        // Redirect to browse page with the genre as the hash
+        // The browse.html page automatically filters based on the hash (window.location.hash)
+        const browseUrl = "{{ '/browse.html' | relative_url }}";
+        window.location.href = browseUrl + "#" + safeGenre;
+    }
+</script>

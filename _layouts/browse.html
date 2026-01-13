@@ -6,218 +6,40 @@ custom-foot: js/browse-js.html
 
 {{ content }}
 
-<style>
-    #browseSection {
-        display: none;
-    }
-
-    #browseSection.active {
-        display: block;
-    }
-</style>
-
-<div id="browseSection">
-    <div class="row mb-3">
-        <div class="col-12">
-            <button class="btn btn-outline-dark mb-3" onclick="showGenreSelection()">
-                &laquo; Back to Genres
-            </button>
-            <h3 class="d-inline-block ms-3">Genre: <span id="currentGenreTitle" class="fw-bold text-primary"></span>
-            </h3>
-        </div>
+<div class="row mb-3 justify-content-center">
+    <div class="col-md-8 text-center">
+        <form role="search" id="browseFilter" onsubmit="submitFilter(); return false;">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" id="filterTextBox" placeholder="Filter ... "
+                    aria-label="Search">
+                <button class="btn btn-success" type="submit" title="Filter items" id="filterButton">Search</button>
+                <button class="btn btn-outline-secondary filter" onclick="resetFilter(); return false;"
+                    data-filter="">Reset</button>
+            </div>
+        </form>
+        <div class="h2" id="numberOf"></div>
     </div>
-
-    <div class="row mb-3 justify-content-center">
-        <div class="col-md-8 text-center">
-            <form role="search" id="browseFilter" onsubmit="submitFilter(); return false;">
-                <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" id="filterTextBox" placeholder="Filter ... "
-                        aria-label="Search">
-                    <button class="btn btn-success" type="submit" title="Filter items" id="filterButton">Search</button>
-                    <button class="btn btn-outline-secondary filter" onclick="resetFilter(); return false;"
-                        data-filter="">Reset</button>
-                </div>
-            </form>
-            <div class="h2" id="numberOf"></div>
-        </div>
-        <div class="col-md-2">
-            <div class="dropdown">
-                <button class="btn btn-secondary mt-1 dropdown-toggle" type="button" id="browseSortButton"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sort by <span id="sortFilter">Random</span>
-                </button>
-                <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
-                    <button class="dropdown-item browse-sort-item active" data-filter="random">Random</button>
-                    <button class="dropdown-item browse-sort-item" data-filter="title">Title</button>
-                    {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %}
-                    {% for o in sort_options %}
-                    <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{ o.sort_name
-                        }}</button>
-                    {% endfor %}
-                </div>
+    <div class="col-md-2">
+        <div class="dropdown">
+            <button class="btn btn-secondary mt-1 dropdown-toggle" type="button" id="browseSortButton"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort by <span id="sortFilter">Random</span>
+            </button>
+            <div class="dropdown-menu browse-sort-menu" aria-labelledby="browseSortButton">
+                <button class="dropdown-item browse-sort-item active" data-filter="random">Random</button>
+                <button class="dropdown-item browse-sort-item" data-filter="title">Title</button>
+                {% assign sort_options = site.data.config-browse | where_exp: 'i','i.sort_name != nil' %}
+                {% for o in sort_options %}
+                <button class="dropdown-item browse-sort-item" data-filter="{{ o.field | escape }}">{{ o.sort_name
+                    }}</button>
+                {% endfor %}
             </div>
         </div>
     </div>
-
-    <div class="row" id="browseItems"></div>
 </div>
 
 <div id="loadingIcon" class="text-center">
     <div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>
 </div>
 
-<!-- Genre/Subject Filters -->
-{% assign raw_subjects = site.data[site.metadata] | map: 'subject' | compact %}
-{% assign subjects = raw_subjects | uniq | sort %}
-<style>
-    .genre-card {
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .genre-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
-        z-index: 10;
-    }
-
-    .genre-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
-        pointer-events: none;
-    }
-</style>
-
-
-<script>
-
-    const genres = [
-        {
-            id: 1,
-            subject: "Banda Sonora",
-            color: "#006450",
-            image: "IMAGE_URL_HERE"
-        },
-        {
-            id: 2,
-            subject: "Jazz",
-            color: "#8D1BE0",
-            image: "IMAGE_URL_HERE"
-        },
-        {
-            id: 3,
-            subject: "Música Española",
-            color: "#9B7C00",
-            image: "IMAGE_URL_HERE"
-        },
-        {
-            id: 4,
-            subject: "Rock y Alternativo ",
-            color: "#1E3264",
-            image: "IMAGE_URL_HERE"
-        },
-        {
-            id: 5,
-            subject: "Urbano y Electrónica",
-            color: "#2D46B9",
-            image: "IMAGE_URL_HERE"
-        },
-        {
-            id: 6,
-            subject: "Todos",
-            color: "#148A08",
-            image: "IMAGE_URL_HERE"
-        }
-    ];
-
-
-</script>
-
-
-<div class="container mb-5" id="genreSection">
-    <! -- Added ID here -->
-        <div class="row justify-content-center g-4" id="genre-filters">
-            <div class="col-12 text-center mb-3">
-                <h5 class="text-muted text-uppercase fw-bold ls-1" style="letter-spacing: 2px;">Explorar Géneros</h5>
-            </div>
-            {% for subject in subjects %}
-            {% capture color %}{% cycle '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEEAD', '#D4A5A5', '#9B59B6',
-            '#3498DB', '#E67E22', '#2ECC71' %}{% endcapture %}
-            <div class="col-md-4">
-                <div class="aspect-square">
-                    <div onclick="filterByGenre('{{ subject | url_encode }}')"
-                        class="relative w-full h-full overflow-hidden rounded-3xl cursor-pointer shadow-lg "
-                        style="background-color: {{ color }}; height: 200px; width: 400px; border-radius: 20px">
-                        <!-- Texto -->
-                        <span
-                            class="absolute top-4 left-4 right-4 text-white font-bold text-2xl md:text-3xl leading-tight drop-shadow ">
-                            {{ subject }}
-                        </span>
-
-                        <!-- Imagen inclinada -->
-                        <img src="{{}}"
-                            class="absolute -bottom-6 -right-6 w-32 h-32 md:w-40 md:h-40 object-cover rounded-lg rotate-12 shadow-xl" />
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            <div class="col-md-4 ">
-                <div class="aspect-square">
-                    <div onclick="filterByGenre('{{ subject | url_encode }}')"
-                        class="relative w-full h-full overflow-hidden rounded-3xl cursor-pointer shadow-lg "
-                        style="background-color: {{ color }}; height: 200px; width: 400px; border-radius: 20px">
-                        <!-- Texto -->
-                        <span
-                            class="absolute top-4 left-4 right-4 text-white font-bold text-2xl md:text-3xl leading-tight drop-shadow ">
-                            Todas
-                        </span>
-
-                        <!-- Imagen inclinada -->
-                        <img src="{{}}"
-                            class="absolute -bottom-6 -right-6 w-32 h-32 md:w-40 md:h-40 object-cover rounded-lg rotate-12 shadow-xl" />
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
-
-<script>
-    let currentGenre = null;
-
-
-
-    function filterByGenre(encodedGenre) {
-        // Decode the genre coming from Liquid
-        let genre = decodeURIComponent(encodedGenre.replace(/\+/g, ' '));
-
-        currentGenre = genre;
-        document.getElementById('genreSection').style.display = 'none';
-
-        // Use classList for active state as requested
-        document.getElementById('browseSection').classList.add('active');
-
-        document.getElementById('currentGenreTitle').textContent = genre;
-
-        // Set the filter to the genre
-        document.getElementById('filterTextBox').value = genre;
-        submitFilter();
-    }
-
-    function showGenreSelection() {
-        document.getElementById('genreSection').style.display = 'block';
-        document.getElementById('browseSection').classList.remove('active');
-        currentGenre = null;
-        document.getElementById('filterTextBox').value = '';
-        // Clear the current filter to show "nothing" or reset? 
-        // Usually, when going back to genres, we might want to clear the search items or just reset.
-        // The resetFilter() function in browse-js clears it.
-        resetFilter();
-    }
-</script>
+<div class="row" id="browseItems"></div>
