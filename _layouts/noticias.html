@@ -1,0 +1,284 @@
+---
+layout: default
+---
+<style>
+    .article-card {
+        margin-bottom: 3rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .article-header {
+        margin-bottom: 1.2rem;
+    }
+
+    .article-meta {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-bottom: 0.8rem;
+    }
+
+    .article-image {
+        width: 320px;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        margin: 1.5rem 0;
+        display: block;
+    }
+
+    .article-excerpt {
+        font-style: italic;
+        border-left: 4px solid #007bff;
+        padding-left: 1rem;
+        margin: 1rem 0;
+        color: #495057;
+    }
+
+    .btn-category {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+        margin-right: 0.3rem;
+        border-radius: 20px;
+        background: #f8f9fa;
+        color: #007bff;
+        border: 1px solid #007bff;
+    }
+
+    .article-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+
+<div class="container my-5">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-3 fw-bold text-primary">{{ page.title }}</h1>
+            <p class="lead text-muted">Mantente al día con las últimas novedades de la música.</p>
+            <div class="header-divider mx-auto"
+                style="width: 80px; height: 5px; background: var(--primary, #007bff); border-radius: 5px;"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="noticias-content bg-white p-4 p-md-5 shadow-sm rounded">
+
+                <article class="article-card">
+                    <div class="article-header text-center">
+                        <div class="article-meta">
+                            <span> 12 de Enero, 2026</span> • <span> Marcos Ramón Lorenzo</span>
+                        </div>
+                        <h2 class="display-5 fw-bold">The Dark Side of the Moon: ¿El mejor álbum de la historia?</h2>
+                        <div class="mt-2">
+                            <span class="btn-category">Reseñas</span>
+                            <span class="btn-category">Rock</span>
+                            <span class="btn-category">Vinilo</span>
+                        </div>
+                    </div>
+
+                    <div class="article-excerpt">
+                        Analizamos la obra maestra de Pink Floyd, una pieza angular del rock progresivo que define
+                        nuestra categoría de Leyendas.
+                    </div>
+
+                    <div class="article-body">
+                        <p>
+                            Si tuviéramos que elegir un solo vinilo para enviar al espacio y explicar a una civilización
+                            alienígena qué es la música humana,
+                            probablemente sería este. <em>The Dark Side of the Moon</em> no es solo un disco; es una
+                            experiencia sónica que transformó
+                            el rock progresivo para siempre.
+                        </p>
+
+                        <p>
+                            En nuestra colección, este ítem (PF008) ocupa un lugar privilegiado bajo la etiqueta de
+                            <em>Leyendas</em> e
+                            <em>Internacional</em>. Publicado originalmente en <strong>1973</strong> por Harvest
+                            Records, este álbum conceptual
+                            sigue siendo tan relevante hoy como hace cinco décadas.
+                        </p>
+
+                        <img src="{{ site.baseurl }}/objects/dark_side.png"
+                            alt="Portada icónica del prisma de Pink Floyd" class="article-image">
+
+                        <h3>Más allá de la música: Un concepto total</h3>
+
+                        <p>
+                            Lo que hace que esta obra de <em>Pink Floyd</em> sea considerada por muchos como el mejor
+                            disco de la historia
+                            es su cohesión. No es una colección de canciones; es un flujo continuo de ideas sobre la
+                            locura, el tiempo,
+                            el dinero y la muerte.
+                        </p>
+
+                        <p>
+                            Desde el latido de corazón que inicia <em>Speak to Me</em> hasta el desvanecimiento final en
+                            <em>Eclipse</em>,
+                            el álbum te atrapa en una atmósfera densa pero cristalina. Es la definición perfecta de un
+                            <em>álbum conceptual</em>.
+                        </p>
+
+                        <h4>Aspectos técnicos y sonoros</h4>
+
+                        <p>
+                            Escuchar este álbum en formato <em>vinilo</em> recupera el ritual de la música. La
+                            producción es impecable:
+                        </p>
+
+                        <ul>
+                            <li><strong>Sintetizadores innovadores:</strong> El uso del VCS3 definió el sonido del Space
+                                Rock.</li>
+                            <li><strong>Bucles de cinta:</strong> Los efectos de sonido en <em>Money</em> fueron
+                                montados manualmente.</li>
+                            <li><strong>Ingeniería de sonido:</strong> Alan Parsons creó una profundidad espacial
+                                excepcional.</li>
+                        </ul>
+
+                        <h3>¿Por qué es esencial en esta colección?</h3>
+
+                        <p>
+                            Clasificado como <em>Rock Progresivo</em> y <em>Clásicos</em>, representa el pináculo de la
+                            era del álbum físico,
+                            en contraste con la inmediatez del consumo digital actual.
+                        </p>
+
+                        <h4>El veredicto</h4>
+
+                        <p>
+                            <em>The Dark Side of the Moon</em> es una pieza obligatoria. Su portada es una de las
+                            imágenes más reconocibles
+                            de la historia del rock. Escucharlo de principio a fin no es una opción, es un mandato.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Article 2: El Madrileño -->
+                <article class="article-card">
+                    <div class="article-header text-center">
+                        <div class="article-meta">
+                            <span> 10 de Enero, 2026</span> • <span> Ada Gracia Torrecillas</span>
+                        </div>
+                        <h2 class="display-5 fw-bold">El Madrileño: Cuando lo urbano se sienta a la mesa con la
+                            tradición</h2>
+                        <div class="mt-2">
+                            <span class="btn-category">Reseñas</span>
+                            <span class="btn-category">Música Española</span>
+                            <span class="btn-category">Fusión</span>
+                        </div>
+                    </div>
+
+                    <div class="article-excerpt">
+                        C. Tangana redefinió el pop español con un álbum que borra las fronteras entre el trap, el
+                        flamenco y la canción popular.
+                    </div>
+
+                    <div class="article-body">
+                        <p>
+                            <em>El Madrileño</em> (2021) es el hito más importante de la música española reciente.
+                            Consolidó a
+                            <strong>C. Tangana</strong> como un artista establecido y redefinió el concepto de pop
+                            nacional.
+                        </p>
+
+                        <img src="{{ site.baseurl }}/objects/madrileno.jpg"
+                            alt="C. Tangana en la portada de El Madrileño" class="article-image">
+
+                        <h3>Colaboraciones que construyen puentes</h3>
+
+                        <ul>
+                            <li><strong>La leyenda:</strong> Gipsy Kings, Eliades Ochoa.</li>
+                            <li><strong>La vanguardia:</strong> Electrónica y autotune contemporáneos.</li>
+                            <li><strong>La raíz:</strong> Copla y pasodoble reinterpretados.</li>
+                        </ul>
+
+                        <blockquote>
+                            “El Madrileño no es un disco de rap, ni de pop, es una sobremesa eterna donde caben todos.”
+                        </blockquote>
+                    </div>
+                </article>
+
+                <!-- Article 3: TKN -->
+                <article class="article-card">
+                    <div class="article-header text-center">
+                        <div class="article-meta">
+                            <span> 08 de Enero, 2026</span> • <span> Álvaro Márquez Sirvent</span>
+                        </div>
+                        <h2 class="display-5 fw-bold">TKN: El asalto global del Trap en una colaboración explosiva</h2>
+                        <div class="mt-2">
+                            <span class="btn-category">Reseñas</span>
+                            <span class="btn-category">Urbano</span>
+                            <span class="btn-category">Digital</span>
+                        </div>
+                    </div>
+
+                    <div class="article-excerpt">
+                        Analizamos el single TKN, donde la fuerza de Rosalía se encuentra con el flow oscuro de Travis
+                        Scott.
+                    </div>
+
+                    <div class="article-body">
+                        <p>
+                            Lanzado en <strong>2020</strong>, <strong>TKN</strong> representa el momento en que la
+                            música urbana latina
+                            rompe definitivamente el mercado anglosajón.
+                        </p>
+
+                        <img src="{{ site.baseurl }}/objects/tkn.avif" alt="Rosalía y Travis Scott en la portada de TKN"
+                            class="article-image">
+
+                        <h3>Análisis del Track</h3>
+
+                        <ol>
+                            <li><strong>El Beat:</strong> Trap con influencias de reggaeton.</li>
+                            <li><strong>La Letra:</strong> Lealtad y círculo cerrado.</li>
+                            <li><strong>El Formato:</strong> Single digital pensado para viralidad.</li>
+                        </ol>
+
+                        <p>
+                            <em>TKN</em> es energía pura y una pieza clave para entender el panorama musical global
+                            reciente.
+                        </p>
+                    </div>
+                </article>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .noticias-content {
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+
+    .noticias-content h2 {
+        color: #232222;
+        margin-top: 2.5rem;
+        font-weight: 700;
+    }
+
+    .noticias-content p {
+        margin-bottom: 1.5rem;
+    }
+
+    .header-divider {
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+    }
+</style>
