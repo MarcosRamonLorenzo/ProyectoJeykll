@@ -3,7 +3,124 @@
 layout: default
 ---
 <div class="container my-4 about-contents">
-{{ content }}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap');
+
+        .about-container {
+            max-width: 800px;
+            font-family: 'Lato', sans-serif;
+            color: #333;
+        }
+
+        .about-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .about-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .team-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 1.1rem;
+            border-left: 3px solid #d63384;
+            /* Acento magenta/vino */
+            padding-left: 20px;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .methodology-list li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .text-justify {
+            line-height: 1.8;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+    </style>
+
+    <div class="container about-container py-5">
+
+        <h1 class="about-title">Sobre Nosotros</h1>
+
+        <div class="text-justify">
+            <p>
+                Bienvenido a nuestra colección digital. Somos el equipo de prácticas formado por estudiantes de 2º curso
+                del
+                <strong>Grado en Ingeniería Multimedia</strong> de la Universidad de Alicante. Este proyecto ha sido
+                desarrollado en el contexto de la asignatura <em>Estructuración de Contenidos</em> (Curso
+                2025-2026)
+            </p>
+
+            <p>El equipo responsable del diseño, arquitectura y curación de contenidos está compuesto por:</p>
+
+            <ul class="team-list">
+                <li><strong>Álvaro Márquez Sirvent</strong></li>
+                <li><strong>Marcos Ramón Lorenzo</strong></li>
+                <li><strong>Ada Gracia Torrecillas</strong></li>
+            </ul>
+        </div>
+
+        <h2 class="about-subtitle">Nuestra Misión y Metodología</h2>
+
+        <div class="text-justify">
+            <p>
+                El objetivo principal de este trabajo ha sido diseñar una <strong>arquitectura de información</strong>
+                eficaz
+                que transforme una simple lista de canciones en una experiencia de exploración cultural. Para lograrlo,
+                hemos aplicado una metodología centrada en el usuario:
+            </p>
+
+            <ul class="methodology-list">
+                <li>
+                    <strong>Investigación de Usuarios:</strong> Realizamos análisis de <em>Keywords</em> y sesiones de
+                    <em>Card Sorting</em>
+                    para entender cómo los oyentes organizan mentalmente la música, priorizando el género y el formato
+                    físico.
+                </li>
+                <li>
+                    <strong>Estructuración de Datos:</strong> Definimos taxonomías personalizadas (Formatos, Época,
+                    Procedencia)
+                    y describimos cada ítem utilizando metadatos estandarizados <strong>Dublin Core</strong>.
+                </li>
+                <li>
+                    <strong>Implementación Técnica:</strong> La colección ha sido construida utilizando el generador de
+                    sitios estáticos
+                    <strong>Jekyll</strong> y el framework especializado <strong>CollectionBuilder</strong>,
+                    garantizando una web rápida,
+                    segura y sostenible.
+                </li>
+            </ul>
+
+            <p class="mt-4">
+                Esperamos que esta colección sirva como ejemplo de cómo la correcta estructuración de contenidos puede
+                enriquecer
+                el descubrimiento musical.
+            </p>
+        </div>
+
+        <div class="mt-5 pt-4 text-center border-top">
+            <small class="text-muted">© 2026 Equipo de Prácticas 4, UA. Implementado con Jekyll &
+                CollectionBuilder.</small>
+        </div>
+
+    </div>
 </div>
 
 {% if page.credits == true %}{% include cb/credits.html %}{% endif %}
